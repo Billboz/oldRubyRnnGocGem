@@ -29,7 +29,7 @@ A **Goc** overview screencast is available at [Youtube](http://www.youtube.com/w
 adding it in Gemfile:
 
 ```ruby
-gem 'goc'
+gem :goc, github: "billboz/goc"
 ```
 
 and running the bundler:
@@ -75,15 +75,15 @@ Examples:
 
 For setups with `--ratings`:
 
-    rake goc:add_badge[BADGE_NAME,POINTS_NUMBER,DEFAULT]
+    rake goc:add_badge[BADGE_NAME,RATINGS_NUMBER,DEFAULT]
 
 For setups with `--domains`:
 
-    rake goc:add_badge[BADGE_NAME,KIND_NAME,DEFAULT]
+    rake goc:add_badge[BADGE_NAME,DOMAIN_NAME,DEFAULT]
 
 For setups with `--ratings` and `--domains`:
 
-    rake goc:add_badge[BADGE_NAME,POINTS_NUMBER,KIND_NAME,DEFAULT]
+    rake goc:add_badge[BADGE_NAME,RATINGS_NUMBER,DOMAIN_NAME,DEFAULT]
 
 For setups without `--ratings` or `--domains`:
 
@@ -95,7 +95,7 @@ Example:
 
 With `--domains` option:
 
-    rake goc:remove_badge[BADGE_NAME,KIND_NAME]
+    rake goc:remove_badge[BADGE_NAME,DOMAIN_NAME]
 
 Without `--domains` option:
 
@@ -105,7 +105,7 @@ Without `--domains` option:
 
 Example:
 
-    rake goc:remove_kind[KIND_NAME]
+    rake goc:remove_kind[DOMAIN_NAME]
 
 **Note:** Before destroying a domain, you must destroy all badges that relate to it.
 
@@ -125,29 +125,29 @@ Resource is the focus of your gamification logic and it should be defined in you
 
 Updating, adding or subtracting some amount of ratings of a resource. It will also remove or add the badges that was affected by the ponctuation change. **It will return a hash with the info related of the badges added or removed.** This method only is usefull when you setup the **Goc** with the ratings system.
 
-**Note:** `kind_id` should be used only when you already used it as a setup argument.
+**Note:** `domain_id` should be used only when you already used it as a setup argument.
 
 ```ruby
 user = User.find(1)
-user.change_points({ ratings: ratings, domain: kind_id }) # Adds or Subtracts some amount of ratings of a domain
+user.change_ratings({ ratings: ratings, domain: domain_id }) # Adds or Subtracts some amount of ratings of a domain
 ```
 
 If you have setup **Goc** without `--domains` then you should only pass the ratings argument instead of a hash:
 
 ```ruby
 user = User.find(1)
-user.change_points(ratings) # Adds or Subtracts some amount of ratings
+user.change_ratings(ratings) # Adds or Subtracts some amount of ratings
 ```
 
 #### Next Badge?
 
 Return the next badge information, including percent and ratings info.
 
-**Note:** `kind_id` should be used only when you already used it as a setup argument.
+**Note:** `domain_id` should be used only when you already used it as a setup argument.
 
 ```ruby
 user = User.find(1)
-user.next_badge?(kind_id) # Returns the information related to the next badge the user should earn
+user.next_badge?(domain_id) # Returns the information related to the next badge the user should earn
 ```
 
 #### Get Badges
