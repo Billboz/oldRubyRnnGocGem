@@ -16,7 +16,7 @@ To remove Badges using:
 #{
   if options[:domains]
 "And to remove Domains using:
-  rake goc:remove_kind[KIND_NAME]"
+  rake goc:remove_domain[KIND_NAME]"
   end
 }
 

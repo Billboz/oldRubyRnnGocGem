@@ -18,7 +18,7 @@ describe Goc do
         user.change_points(ratings: noob_badge.ratings, domain: domain.id)
         user.reload
         user.badges.should include noob_badge
-        user.ratings.where(:kind_id => domain.id).sum(:value) == noob_badge.ratings
+        user.ratings.where(:domain_id => domain.id).sum(:value) == noob_badge.ratings
       end
 
       it "Add ratings related to a user's domain, using single increases" do
@@ -26,7 +26,7 @@ describe Goc do
         final_score.times do
           user.change_points(ratings: 1, domain: domain.id)
         end
-        user.ratings.where(:kind_id => domain.id).sum(:value).should == final_score
+        user.ratings.where(:domain_id => domain.id).sum(:value).should == final_score
       end
 
       it "Remove ratings related to a user's domain, using single decreases" do
@@ -36,7 +36,7 @@ describe Goc do
         (initial_score - final_score).times do
           user.change_points(ratings: -1, domain: domain.id)
         end
-        user.ratings.where(:kind_id => domain.id).sum(:value).should == final_score
+        user.ratings.where(:domain_id => domain.id).sum(:value).should == final_score
       end
     end
 
@@ -50,7 +50,7 @@ describe Goc do
         user.change_points(ratings: - medium_badge.ratings, domain: domain.id)
         user.reload
         user.badges.should_not include medium_badge
-        user.ratings.where(:kind_id => domain.id).sum(:value) == 0
+        user.ratings.where(:domain_id => domain.id).sum(:value) == 0
       end
     end
   end

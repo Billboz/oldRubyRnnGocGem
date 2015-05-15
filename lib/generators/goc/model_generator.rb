@@ -2,9 +2,9 @@ module ModelGenerator
   def generate_models
     generate("model", "level badge_id:integer #{@model_name}_id:integer")
     if options[:domains]
-      generate("model", "rating user_id:integer kind_id:integer value:integer")
+      generate("model", "rating user_id:integer domain_id:integer value:integer")
       generate("model", "domain name:string")
-      generate("model", "badge name:string kind_id:integer  #{(options[:ratings]) ? "ratings:integer" : ""} default:boolean")
+      generate("model", "badge name:string domain_id:integer  #{(options[:ratings]) ? "ratings:integer" : ""} default:boolean")
     else
       generate("migration", "add_points_to_#{@model_name.pluralize} ratings:integer") if options[:ratings]
       generate("model", "badge name:string #{(options[:ratings]) ? "ratings:integer" : ""} default:boolean")

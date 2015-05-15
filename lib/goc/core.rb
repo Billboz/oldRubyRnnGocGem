@@ -6,8 +6,8 @@ class Goc
 
     def self.related_info(resource, ratings, domain)
       if DOMAINS && domain
-        old_pontuation  = resource.ratings.where(:kind_id => domain.id).sum(:value)
-        related_badges  = Badge.where(((old_pontuation < ratings) ? "ratings <= #{ratings}" : "ratings > #{ratings} AND ratings <= #{old_pontuation}") + " AND kind_id = #{domain.id}")
+        old_pontuation  = resource.ratings.where(:domain_id => domain.id).sum(:value)
+        related_badges  = Badge.where(((old_pontuation < ratings) ? "ratings <= #{ratings}" : "ratings > #{ratings} AND ratings <= #{old_pontuation}") + " AND domain_id = #{domain.id}")
       else
         old_pontuation  = resource.ratings.to_i
         related_badges  = Badge.where((old_pontuation < ratings) ? "ratings <= #{ratings}" : "ratings > #{ratings} AND ratings <= #{old_pontuation}")
@@ -27,7 +27,7 @@ class Goc
 
       Badge.transaction do
           if DOMAINS && domain
-          resource.ratings << Rating.create({ :kind_id => domain.id, :value => new_pontuation })
+          resource.ratings << Rating.create({ :domain_id => domain.id, :value => new_pontuation })
         elsif RATINGS
           resource.update_attribute( :ratings, ratings )
         end

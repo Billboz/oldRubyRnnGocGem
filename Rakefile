@@ -47,7 +47,7 @@ end
 task :trash_badges do
   sh "cd #{test};RAILS_ENV=test rake goc:add_badge[noob,100,teacher]"
   sh "cd #{test};RAILS_ENV=test rake goc:remove_badge[noob,teacher]"
-  sh "cd #{test};RAILS_ENV=test rake goc:remove_kind[teacher]"
+  sh "cd #{test};RAILS_ENV=test rake goc:remove_domain[teacher]"
 end
 
 task :adding_badges do

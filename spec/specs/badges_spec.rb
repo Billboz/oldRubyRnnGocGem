@@ -15,7 +15,7 @@ describe Goc do
         noob_badge.add(user.id)
         user.reload
         user.badges.should include noob_badge
-        user.ratings.where(:kind_id => domain.id).sum(:value) == noob_badge.ratings
+        user.ratings.where(:domain_id => domain.id).sum(:value) == noob_badge.ratings
       end
 
     end
@@ -32,7 +32,7 @@ describe Goc do
         hard_badge.remove(user.id)
         user.reload
         user.badges.should_not include hard_badge
-        user.ratings.where(:kind_id => domain.id).sum(:value) == medium_badge.ratings
+        user.ratings.where(:domain_id => domain.id).sum(:value) == medium_badge.ratings
       end
 
     end

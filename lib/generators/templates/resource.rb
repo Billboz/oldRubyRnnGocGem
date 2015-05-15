@@ -9,7 +9,7 @@ def change_points(options)
 
   if Goc::Core::DOMAINS
     raise "Missing Domain Identifier argument" if !domain
-    old_pontuation = self.ratings.where(:kind_id => domain.id).sum(:value)
+    old_pontuation = self.ratings.where(:domain_id => domain.id).sum(:value)
   else
     old_pontuation = self.ratings.to_i
   end
@@ -17,10 +17,10 @@ def change_points(options)
   Goc::Core.sync_resource_by_points(self, new_pontuation, domain)
 end
 
-def next_badge?(kind_id = false)
+def next_badge?(domain_id = false)
   if Goc::Core::DOMAINS
-    raise "Missing Domain Identifier argument" if !kind_id
-    old_pontuation = self.ratings.where(:kind_id => kind_id).sum(:value)
+    raise "Missing Domain Identifier argument" if !domain_id
+    old_pontuation = self.ratings.where(:domain_id => domain_id).sum(:value)
   else
     old_pontuation = self.ratings.to_i
   end

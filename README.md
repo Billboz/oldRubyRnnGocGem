@@ -105,7 +105,7 @@ Without `--domains` option:
 
 Example:
 
-    rake goc:remove_kind[DOMAIN_NAME]
+    rake goc:remove_domain[DOMAIN_NAME]
 
 **Note:** Before destroying a domain, you must destroy all badges that relate to it.
 
